@@ -25,7 +25,7 @@ std::string getCurrentTime() {
 void writeToLogFile(const std::string& message) {
     std::ofstream logFile(LOG_FILE, std::ios_base::app);
     if (logFile.is_open()) {
-        logFile << getCurrentTime() << " - " << message << std::endl;
+        logFile << getCurrentTime() << " " << message << std::endl;
         logFile.close();
     } else {
         std::cerr << "Unable to open log file." << std::endl;
@@ -65,9 +65,9 @@ void temperatureReadLoop() {
 	std::ostringstream oss;
 	oss.precision(2);
 	oss << std::fixed;
-	oss << "Temperature: " << (temperature / 1000.0) << " °C";
+	oss << (temperature / 1000.0);
 	writeToLogFile(oss.str());
-        sleep(1);
+        sleep(5);
     }
 
     softPwmStop(pin);
